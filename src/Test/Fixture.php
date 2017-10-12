@@ -28,7 +28,7 @@
  * $json = Pluf_Test_Fixture::dump('YourApp_Model'); // the full table
  * $json = Pluf_Test_Fixture::dump($model); // one given model
  */
-class Pluf_Test_Fixture
+class Test_Fixture
 {
 
     public static function loadFile($file)

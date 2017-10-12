@@ -33,7 +33,10 @@
  * 
  *
  */
-class Pluf_Test_Client
+
+define ( "IN_UNIT_TESTS", true);
+
+class Test_Client
 {
     public $views = '';
     public $dispatcher = '';
@@ -43,7 +46,7 @@ class Pluf_Test_Client
     {
         $this->views = $views;
         $this->dispatcher = new Pluf_Dispatcher();
-        $this->dispatcher->loadControllers($this->views);
+//         $this->dispatcher->loadControllers($this->views);
         $this->clean(false);
     }
 
@@ -83,7 +86,7 @@ class Pluf_Test_Client
             $_COOKIE[$cookie] = $data;
         }
         ob_implicit_flush(False);
-        list($request, $response) = $this->dispatcher->dispatch($page);
+        list($request, $response) = $this->dispatcher->dispatch($page, $this->views);
         ob_start();
         $response->render();
         $content = ob_get_contents(); 
