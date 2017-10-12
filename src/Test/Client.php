@@ -1,35 +1,36 @@
 <?php
-/* -*- tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- */
 /*
-# ***** BEGIN LICENSE BLOCK *****
-# This file is part of Plume Framework, a simple PHP Application Framework.
-# Copyright (C) 2001-2007 Loic d'Anterroches and contributors.
-#
-# Plume Framework is free software; you can redistribute it and/or modify
-# it under the terms of the GNU Lesser General Public License as published by
-# the Free Software Foundation; either version 2.1 of the License, or
-# (at your option) any later version.
-#
-# Plume Framework is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU Lesser General Public License for more details.
-#
-# You should have received a copy of the GNU Lesser General Public License
-# along with this program; if not, write to the Free Software
-# Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-#
-# ***** END LICENSE BLOCK ***** */
+ * This file is part of Pluf Framework, a simple PHP Application Framework.
+ * Copyright (C) 2010-2020 Phoinex Scholars Co. (http://dpq.co.ir)
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
 
 /**
  * Emulates a client to call your views during unit testing.
+ * 
+ * There are several assumption in Pluf_Dispatcher which must fill befor
+ * calling a view. This Methodd init system to call view functions.
  * 
  * Usage:
  * <code>
  * $client = new Pluf_Test_Client('./path/to/app-views.php');
  * $response = $client->get('/the/page/', array('var'=>'toto'));
- * $response is now the Pluf_HTTP_Response
  * </code>
+ * 
+ * In this example $response is the view response.
+ * 
  *
  */
 class Pluf_Test_Client
@@ -46,6 +47,11 @@ class Pluf_Test_Client
         $this->clean(false);
     }
 
+    /**
+     * Clean client connection
+     * 
+     * @param boolean $keepcookies
+     */
     protected function clean($keepcookies=true)
     {
         $_REQUEST = array();
@@ -63,6 +69,12 @@ class Pluf_Test_Client
         $_SERVER['HTTP_HOST'] = 'localhost';
     }
 
+    /**
+     * Dispatch a url
+     * 
+     * @param string $page
+     * @return Object
+     */
     protected function dispatch($page)
     {
         $GLOBALS['_PX_tests_templates'] = array();
@@ -92,6 +104,13 @@ class Pluf_Test_Client
         return $response;
     }
 
+    /**
+     * Calling a get function
+     * 
+     * @param string $page the view url
+     * @param array $params
+     * @return object
+     */
     public function get($page, $params=array()) 
     {
         $this->clean();
@@ -107,7 +126,14 @@ class Pluf_Test_Client
         return $response;
     }
 
-
+    
+    /**
+     * Calling a post fuction
+     *
+     * @param string $page the view url
+     * @param array $params
+     * @return object
+     */
     public function post($page, $params=array(), $files=array()) 
     {
         $this->clean();
@@ -115,6 +141,28 @@ class Pluf_Test_Client
         $_REQUEST = $params;
         $_FILES = $files; //FIXME need to match the correct array structure
         $_SERVER['REQUEST_METHOD'] = 'POST';
+        $response = $this->dispatch($page);
+        if ($response->status_code == 302) {
+            list($page, $params) = $this->parseRedirect($response->headers['Location']);
+            return $this->get($page, $params);
+        }
+        return $response;
+    }
+
+    
+    /**
+     * Calling a delete fuction
+     *
+     * @param string $page the view url
+     * @param array $params
+     * @return object
+     */
+    public function delete($page, $params=array()) 
+    {
+        $this->clean();
+        $_POST = $params;
+        $_REQUEST = $params;
+        $_SERVER['REQUEST_METHOD'] = 'DELETE';
         $response = $this->dispatch($page);
         if ($response->status_code == 302) {
             list($page, $params) = $this->parseRedirect($response->headers['Location']);
