@@ -135,6 +135,7 @@ class Test_Client
      *
      * @param string $page the view url
      * @param array $params
+     * @param files list of attached files
      * @return object
      */
     public function post($page, $params=array(), $files=array()) 
