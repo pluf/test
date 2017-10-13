@@ -62,7 +62,7 @@ class Test_Client
             $_COOKIE = array();
             $this->cookies = array();
         }
-        $_SERVER = array();
+//         $_SERVER = array();
         $_GET = array();
         $_POST = array();
         $_FILES = array();
