@@ -1,0 +1,30 @@
+{
+	"name" : "pluf/test",
+	"description" : "A pluf mock object and test utilities",
+	"type" : "library",
+	"license" : "MIT",
+	"keywords" : [
+		"pluf",
+		"test",
+		"phpunit",
+		"mock"
+	],
+	"authors" : [{
+			"name" : "Mostafa Barmshory",
+			"email" : "mostafa.barmshory@dpq.co.ir",
+			"homepage" : "http://dpq.co.ir",
+			"role" : "developer"
+		}, {
+			"name" : "Mohammad Hadi Mansouri",
+			"email" : "mohammad.hadi.mansouri@dpq.co.ir",
+			"homepage" : "http://dpq.co.ir",
+			"role" : "developer"
+		}
+	],
+	"require" : {
+		"phpunit/phpunit" : "^5.7.14",
+		"phpunit/php-invoker" : "^1.1",
+		"phpunit/dbunit" : "^2.0",
+		"phpunit/phpunit-story" : "^1.0"
+	}
+}
