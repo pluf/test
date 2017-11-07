@@ -70,6 +70,9 @@ class Test_Client
         $_SERVER['REQUEST_URI'] = '';
         $_SERVER['REMOTE_ADDR'] = '127.0.0.1';
         $_SERVER['HTTP_HOST'] = 'localhost';
+        
+        $req = new Pluf_HTTP_Request('');
+        $GLOBALS['_PX_request'] = $req;
     }
 
     /**
