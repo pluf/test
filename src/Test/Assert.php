@@ -32,9 +32,12 @@ class Test_Assert extends Assert
      * @param Pluf_HTTP_Response $response
      * @param string $message
      */
-    public static function assertResponseAsModel($actualJson, $message = '')
+    public static function assertResponseAsModel($response, $message = '')
     {
-        static::assertJson($actualJson, $message);
+        static::assertJson($response->content, $message);
+        $actual = json_decode($response->content, true);
+        static::assertArrayHasKey('id', $actual, $message);
+        static::assertTrue($actual['id'] > 0, $message);
     }
 
     /**
@@ -108,7 +111,7 @@ class Test_Assert extends Assert
      * @param Pluf_HTTP_Response $response
      * @param string $message
      */
-    public static function assertResponseNotAnonymousModel($response, $message)
+    public static function assertResponseNotAnonymousModel($response, $message = '')
     {
         static::assertJson($response->content, $message);
         $actual = json_decode($response->content, true);
