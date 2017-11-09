@@ -26,5 +26,8 @@
 		"phpunit/php-invoker" : "^1.1",
 		"phpunit/dbunit" : "^2.0",
 		"phpunit/phpunit-story" : "^1.0"
-	}
+	},
+	"include-path" : [
+		"src/"
+	]
 }
