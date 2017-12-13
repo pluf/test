@@ -46,7 +46,6 @@ class Test_Client
     {
         $this->views = $views;
         $this->dispatcher = new Pluf_Dispatcher();
-//         $this->dispatcher->loadControllers($this->views);
         $this->clean(false);
     }
 
