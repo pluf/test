@@ -32,7 +32,7 @@ class Pluf_Tests_Fixture_LoadDump extends UnitTestCase {
     {
         $db = Pluf::db();
         $schema = Pluf::factory('Pluf_DB_Schema', $db);
-        $m = new Pluf_Permission();
+        $m = new Role();
         $schema->model = $m;
         $schema->dropTables();
         $schema->createTables();
@@ -42,7 +42,7 @@ class Pluf_Tests_Fixture_LoadDump extends UnitTestCase {
     {
         $db = Pluf::db();
         $schema = Pluf::factory('Pluf_DB_Schema', $db);
-        $m = new Pluf_Permission();
+        $m = new Role();
         $schema->model = $m;
         $schema->dropTables();
     }
@@ -50,22 +50,22 @@ class Pluf_Tests_Fixture_LoadDump extends UnitTestCase {
 
     function testDump()
     {
-        $p = new Pluf_Permission();
+        $p = new Role();
         $p->name = 'test permission';
         $p->code_name = 'test';
         $p->description = 'Simple test permission.';
         $p->application = 'Pluf';
         $p->create();
-        $json = Pluf_Test_Fixture::dump('Pluf_Permission');
-        $this->assertEqual('[{"model":"Pluf_Permission","pk":1,"fields":{"id":1,"name":"test permission","code_name":"test","description":"Simple test permission.","application":"Pluf"}}]',
+        $json = Pluf_Test_Fixture::dump('Role');
+        $this->assertEqual('[{"model":"Role","pk":1,"fields":{"id":1,"name":"test permission","code_name":"test","description":"Simple test permission.","application":"Pluf"}}]',
                             $json);
     }
 
     function testLoad()
     {
-        $created = Pluf_Test_Fixture::load('[{"model":"Pluf_Permission","pk":1,"fields":{"id":1,"name":"test permission","code_name":"test","description":"Simple test permission.","application":"Pluf"}}]');
-        $this->assertEqual(array(array('Pluf_Permission', '1')), $created);
-        $p = new Pluf_Permission(1);
+        $created = Pluf_Test_Fixture::load('[{"model":"Role","pk":1,"fields":{"id":1,"name":"test permission","code_name":"test","description":"Simple test permission.","application":"Pluf"}}]');
+        $this->assertEqual(array(array('Role', '1')), $created);
+        $p = new Role(1);
         $this->assertEqual(1, $p->id);        
     }
 }
