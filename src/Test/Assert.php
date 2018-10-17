@@ -48,7 +48,7 @@ class Test_Assert extends Assert
      */
     public static function assertResponseStatusCode($response, $code, $message = 'Status code is not fit')
     {
-        static::assertEquals($response->status_code, 200, $message);
+        static::assertEquals($response->status_code, $code, $message);
     }
 
     /**
