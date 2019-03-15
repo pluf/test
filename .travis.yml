@@ -27,9 +27,7 @@ install:
   - php coveralls.phar --version
   
 script:
-  - cd tests
   - php run.php
-  - cd ..
 
 after_success:
 # Submit coverage report to Coveralls servers, see .coveralls.yml
