@@ -22,7 +22,7 @@
 		}
 	],
 	"require" : {
-		"pluf/core" : "5.4.x",
+		"pluf/core" : "5.5.x",
 		"phpunit/phpunit" : "^5.7.14",
 		"phpunit/php-invoker" : "^1.1",
 		"phpunit/dbunit" : "^2.0",

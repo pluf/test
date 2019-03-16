@@ -54,7 +54,7 @@ class Test_Client
      * 
      * @param boolean $keepcookies
      */
-    protected function clean($keepcookies=true)
+    public function clean($keepcookies=true)
     {
         $_REQUEST = array();
         if (!$keepcookies) {

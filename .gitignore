@@ -1,2 +1,5 @@
 /vendor/
 /.buildpath
+/build/
+
+tests/tmp
