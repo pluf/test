@@ -1,7 +1,21 @@
+# Eclipse
+#.buildpath
+/.settings/
+.phpunit.result.cache
+.buildpath
+
+
+# Examples
+/site/tenant
+
+# Composer
 /vendor/
-/.buildpath
+composer.lock
+composer-setup.php
+composer.phar
+
+clover.xml
 /build/
 
-tests/tmp
-/.phpunit.result.cache
-/composer.lock
+# netbeans
+/nbproject/private/
