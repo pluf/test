@@ -3,3 +3,5 @@
 /build/
 
 tests/tmp
+/.phpunit.result.cache
+/composer.lock
