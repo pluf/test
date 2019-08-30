@@ -1,7 +1,6 @@
 language: php
 php:
-#  - '5.6' IS NOT SUPPORTED ANYMORE
-  - '7.1'
+  - '7.2'
 
 services:
   - mysql
@@ -21,6 +20,7 @@ before_install:
 install:
   # Install composer packages, will also trigger dump-autoload
   - travis_retry composer install --no-interaction
+  - travis_retry composer require codeclimate/php-test-reporter --no-interaction
   # Install coveralls.phar
   - wget -c -nc --retry-connrefused --tries=0 https://github.com/satooshi/php-coveralls/releases/download/v1.0.1/coveralls.phar
   - chmod +x coveralls.phar
@@ -28,6 +28,8 @@ install:
   
 script:
   - php run.php
+  # CODECLIMATE_REPO_TOKEN reqired
+  - vendor/bin/test-reporter
 
 after_success:
 # Submit coverage report to Coveralls servers, see .coveralls.yml
