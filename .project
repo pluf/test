@@ -6,8 +6,7 @@
 	</projects>
 	<buildSpec>
 		<buildCommand>
-			<name>org.eclipse.php.composer.core.builder.buildPathManagementBuilder
-			</name>
+			<name>org.eclipse.php.composer.core.builder.buildPathManagementBuilder</name>
 			<arguments>
 			</arguments>
 		</buildCommand>
