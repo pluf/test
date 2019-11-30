@@ -22,7 +22,7 @@
 		}
 	],
 	"require" : {
-		"pluf/core" : "5.11.x",
+		"pluf/core" : "5.12.x",
 		"phpunit/phpunit" : "^8.3"
 	},
 	"include-path" : [
