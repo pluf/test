@@ -33,10 +33,12 @@
  * 
  *
  */
+namespace Pluf\Test;
 
-define ( "IN_UNIT_TESTS", true);
+use Pluf_Dispatcher;
+use Pluf_HTTP_Request;
 
-class Test_Client
+class Client
 {
     public $views = '';
     public $dispatcher = '';

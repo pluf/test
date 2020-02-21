@@ -3,7 +3,7 @@
 
 This tutorial assumes that you use PHP 7.3 or PHP 7.4. You will learn how to write simple unit tests as well as how to download and run PlufTest.
 
-PlufTest is based on PHPUnit9.
+PlufTest is based on PHPUnit 8.
 
 ## Install
 
@@ -120,7 +120,7 @@ Note: Do not put tests in a namespace.
 ## Run the test
 
 	./vendor/bin/phpunit --bootstrap vendor/autoload.php tests/EmailTest
-	PHPUnit 9.0.0 by Sebastian Bergmann and contributors.
+	PHPUnit 8.0.0 by Sebastian Bergmann and contributors.
 	
 	...                                                                 3 / 3 (100%)
 	

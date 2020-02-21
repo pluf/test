@@ -22,10 +22,20 @@
 		}
 	],
 	"require" : {
-		"pluf/core" : "5.12.x",
-		"phpunit/phpunit" : "^8.3"
+		"pluf/core" : "^5",
+		"phpunit/phpunit" : "7.x"
 	},
-	"include-path" : [
-		"src/"
+	"autoload" : {
+		"psr-4" : {
+			"Pluf\\Test\\" : "src/"
+		}
+	},
+	"autoload-dev" : {
+		"psr-4" : {
+			"Pluf\\Test\\" : "tests/"
+		}
+	},
+	"bin" : [
+		"src/pluftest"
 	]
 }

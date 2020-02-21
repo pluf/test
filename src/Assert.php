@@ -16,14 +16,16 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-use PHPUnit\Framework\Assert;
+namespace Pluf\Test;
+
+use Pluf_HTTP_Response;
 
 /**
  * Essensial Pluf assertions
  *
  * @author maso<mostafa.barmshory@dpq.co.ir>
  */
-class Test_Assert extends Assert
+class Test_Assert extends \PHPUnit\Framework\Assert
 {
 
     /**
