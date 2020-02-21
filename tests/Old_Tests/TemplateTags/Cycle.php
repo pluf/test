@@ -1,34 +1,33 @@
 <?php
-/* -*- tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- */
 /*
-# ***** BEGIN LICENSE BLOCK *****
-# This file is part of Plume Framework, a simple PHP Application Framework.
-# Copyright (C) 2001-2010 Loic d'Anterroches and contributors.
-#
-# Plume Framework is free software; you can redistribute it and/or modify
-# it under the terms of the GNU Lesser General Public License as published by
-# the Free Software Foundation; either version 2.1 of the License, or
-# (at your option) any later version.
-#
-# Plume Framework is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU Lesser General Public License for more details.
-#
-# You should have received a copy of the GNU Lesser General Public License
-# along with this program; if not, write to the Free Software
-# Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-#
-# ***** END LICENSE BLOCK ***** */
+ * This file is part of Pluf Framework, a simple PHP Application Framework.
+ * Copyright (C) 2010-2020 Phoinex Scholars Co. (http://dpq.co.ir)
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
+use PHPUnit\Framework\TestCase;
 
-class Pluf_Tests_Templatetags_Cycle extends Pluf_Test_TemplatetagsUnitTestCase
+class Pluf_Tests_Templatetags_Cycle extends TestCase
 {
+
     protected $tag_class = 'Pluf_Template_Tag_Cycle';
+
     protected $tag_name = 'cycle';
 
     public function skip($message = '')
     {
-        if (!empty($message)) {
+        if (! empty($message)) {
             $this->skipIf(1, "%s\n      " . $message);
         }
     }
@@ -46,10 +45,10 @@ class Pluf_Tests_Templatetags_Cycle extends Pluf_Test_TemplatetagsUnitTestCase
 
     public function testSimpleCaseInLoop()
     {
-        $context = new Pluf_Template_Context(array('test' => range(0, 4)));
-        $to_parse = '{foreach $test as $i}'.
-                    '{cycle "a", "b"}{$i},'.
-                    '{/foreach}';
+        $context = new Pluf_Template_Context(array(
+            'test' => range(0, 4)
+        ));
+        $to_parse = '{foreach $test as $i}' . '{cycle "a", "b"}{$i},' . '{/foreach}';
         $expected = 'a0,b1,a2,b3,a4,';
         $tpl = $this->getNewTemplate($to_parse);
         $this->assertEqual($expected, $tpl->render($context));
@@ -57,10 +56,10 @@ class Pluf_Tests_Templatetags_Cycle extends Pluf_Test_TemplatetagsUnitTestCase
 
     public function testSingleStringArgument()
     {
-        $context = new Pluf_Template_Context(array('test' => range(0, 4)));
-        $to_parse = '{foreach $test as $i}'.
-                    '{cycle "a"}{$i},'.
-                    '{/foreach}';
+        $context = new Pluf_Template_Context(array(
+            'test' => range(0, 4)
+        ));
+        $to_parse = '{foreach $test as $i}' . '{cycle "a"}{$i},' . '{/foreach}';
         $expected = 'a0,a1,a2,a3,a4,';
         $tpl = $this->getNewTemplate($to_parse);
         $this->assertEqual($expected, $tpl->render($context));
@@ -68,10 +67,10 @@ class Pluf_Tests_Templatetags_Cycle extends Pluf_Test_TemplatetagsUnitTestCase
 
     public function testSingleArrayArgument()
     {
-        $context = new Pluf_Template_Context(array('test' => range(0, 4)));
-        $to_parse = '{foreach $test as $i}'.
-                    '{cycle array("a", "b", "c")}{$i},'.
-                    '{/foreach}';
+        $context = new Pluf_Template_Context(array(
+            'test' => range(0, 4)
+        ));
+        $to_parse = '{foreach $test as $i}' . '{cycle array("a", "b", "c")}{$i},' . '{/foreach}';
         $expected = 'a0,b1,c2,a3,b4,';
         $tpl = $this->getNewTemplate($to_parse);
         $this->assertEqual($expected, $tpl->render($context));
@@ -79,7 +78,9 @@ class Pluf_Tests_Templatetags_Cycle extends Pluf_Test_TemplatetagsUnitTestCase
 
     public function testSingleContextVariableArgument()
     {
-        $context = new Pluf_Template_Context(array('one' => 1));
+        $context = new Pluf_Template_Context(array(
+            'one' => 1
+        ));
         $to_parse = '{cycle $one}{cycle $one}';
         $expected = '11';
         $tpl = $this->getNewTemplate($to_parse);
@@ -96,23 +97,17 @@ class Pluf_Tests_Templatetags_Cycle extends Pluf_Test_TemplatetagsUnitTestCase
 
     public function testAssignContextVariable()
     {
-        $to_parse = '{cycle array("a", "b", "c"), "abc"}'.
-                    '{cycle $abc}';
+        $to_parse = '{cycle array("a", "b", "c"), "abc"}' . '{cycle $abc}';
         $expected = 'ab';
         $tpl = $this->getNewTemplate($to_parse);
         $this->assertEqual($expected, $tpl->render());
 
-        $to_parse = '{cycle array("a", "b", "c"), "abc"}'.
-                    '{cycle $abc}'.
-                    '{cycle $abc}';
+        $to_parse = '{cycle array("a", "b", "c"), "abc"}' . '{cycle $abc}' . '{cycle $abc}';
         $expected = 'abc';
         $tpl = $this->getNewTemplate($to_parse);
         $this->assertEqual($expected, $tpl->render());
 
-        $to_parse = '{cycle array("a", "b", "c"), "abc"}'.
-                    '{cycle $abc}'.
-                    '{cycle $abc}'.
-                    '{cycle $abc}';
+        $to_parse = '{cycle array("a", "b", "c"), "abc"}' . '{cycle $abc}' . '{cycle $abc}' . '{cycle $abc}';
         $expected = 'abca';
         $tpl = $this->getNewTemplate($to_parse);
         $this->assertEqual($expected, $tpl->render());
@@ -120,18 +115,20 @@ class Pluf_Tests_Templatetags_Cycle extends Pluf_Test_TemplatetagsUnitTestCase
 
     public function testContextVariablesInArrayAsArgument()
     {
-        $context = new Pluf_Template_Context(array('test' => range(0, 4),
-                                                   'one' => 1,
-                                                   'two' => 2));
-        $to_parse = '{foreach $test as $i}'.
-                    '{cycle array($one, $two)}'.
-                    '{/foreach}';
+        $context = new Pluf_Template_Context(array(
+            'test' => range(0, 4),
+            'one' => 1,
+            'two' => 2
+        ));
+        $to_parse = '{foreach $test as $i}' . '{cycle array($one, $two)}' . '{/foreach}';
         $expected = '12121';
         $tpl = $this->getNewTemplate($to_parse);
         $this->assertEqual($expected, $tpl->render($context));
 
-        $context = new Pluf_Template_Context(array('one' => 1,
-                                                   'two' => 2));
+        $context = new Pluf_Template_Context(array(
+            'one' => 1,
+            'two' => 2
+        ));
         $to_parse = '{cycle array($one, $two), "counter"}{cycle $counter}';
         $expected = '12';
         $tpl = $this->getNewTemplate($to_parse);
@@ -140,12 +137,12 @@ class Pluf_Tests_Templatetags_Cycle extends Pluf_Test_TemplatetagsUnitTestCase
 
     public function testContextVariablesArgument()
     {
-        $context = new Pluf_Template_Context(array('test' => range(0, 4),
-                                                   'first' => 'a',
-                                                   'second' => 'b'));
-        $to_parse = '{foreach $test as $i}'.
-                    '{cycle $first, $second}{$i},'.
-                    '{/foreach}';
+        $context = new Pluf_Template_Context(array(
+            'test' => range(0, 4),
+            'first' => 'a',
+            'second' => 'b'
+        ));
+        $to_parse = '{foreach $test as $i}' . '{cycle $first, $second}{$i},' . '{/foreach}';
         $expected = 'a0,b1,a2,b3,a4,';
         $tpl = $this->getNewTemplate($to_parse);
         $this->assertEqual($expected, $tpl->render($context));
@@ -156,8 +153,10 @@ class Pluf_Tests_Templatetags_Cycle extends Pluf_Test_TemplatetagsUnitTestCase
         $this->skip('Pluf has no support for applying filters to a variable of array');
         return;
 
-        $context = new Pluf_Template_Context(array('one' => 'A',
-                                                   'two' => '2'));
+        $context = new Pluf_Template_Context(array(
+            'one' => 'A',
+            'two' => '2'
+        ));
         $to_parse = '{cycle array($one|lower, $two), "counter"}{cycle $counter}';
         $expected = 'a2';
         $tpl = $this->getNewTemplate($to_parse);
