@@ -38,7 +38,7 @@ class Fixture
     public static function loadFile($file)
     {
         if (false === ($ffile = Pluf::fileExists($file))) {
-            throw new Exception(sprintf(__('Fixture file not found: %s.'), $file));
+            throw new Exception(sprintf('Fixture file not found: %s.', $file));
         }
         return self::load(file_get_contents($ffile));
     }
@@ -52,7 +52,7 @@ class Fixture
             if ((int) $model['pk'] > 0) {
                 $item = new $model['model']($model['pk']);
                 if ($item->id == $model['pk']) {
-                    throw new Exception(sprintf(__('Cannot load existing model <%1$s(%2$s)>.'), $model['model'], $model['pk']));
+                    throw new Exception(sprintf('Cannot load existing model <%1$s(%2$s)>.', $model['model'], $model['pk']));
                 }
             }
             $m = new $model['model']();

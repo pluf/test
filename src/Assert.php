@@ -18,106 +18,12 @@
  */
 namespace Pluf\Test;
 
-use Pluf_HTTP_Response;
-
 /**
  * Essensial Pluf assertions
  *
  * @author maso<mostafa.barmshory@dpq.co.ir>
+ * @deprecated Use \Pluf\Test\TestCase
  */
-class Test_Assert extends \PHPUnit\Framework\Assert
+class Assert extends TestCase
 {
-
-    /**
-     * Check if this is a Pluf_Model
-     *
-     * @param Pluf_HTTP_Response $response
-     * @param string $message
-     */
-    public static function assertResponseAsModel($response, $message = '')
-    {
-        static::assertJson($response->content, $message);
-        $actual = json_decode($response->content, true);
-        static::assertArrayHasKey('id', $actual, $message);
-        static::assertTrue($actual['id'] > 0, $message);
-    }
-
-    /**
-     *
-     * @param Pluf_HTTP_Response $response
-     * @param int $code
-     * @param string $message
-     */
-    public static function assertResponseStatusCode($response, $code, $message = 'Status code is not fit')
-    {
-        static::assertEquals($response->status_code, $code, $message);
-    }
-
-    /**
-     *
-     * @param Pluf_HTTP_Response $response
-     * @param string $message
-     */
-    public static function assertResponseNotNull($response, $message = 'Response is null')
-    {
-        static::assertNotNull($response, $message);
-        static::assertNotNull($response->content, $message);
-    }
-
-    /**
-     *
-     * @param Pluf_HTTP_Response $response
-     * @param string $message
-     */
-    public static function assertResponsePaginateList($response, $message = '')
-    {
-        static::assertJson($response->content, $message);
-        $actual = json_decode($response->content, true);
-        static::assertArrayHasKey('items', $actual, $message);
-        static::assertArrayHasKey('current_page', $actual, $message);
-        static::assertArrayHasKey('page_number', $actual, $message);
-    }
-
-    /**
-     *
-     * @param Pluf_HTTP_Response $response
-     * @param string $message
-     */
-    public static function assertResponseEmptyPaginateList($response, $message = '')
-    {
-        static::assertJson($response->content, $message);
-        $actual = json_decode($response->content, true);
-        static::assertArrayHasKey('items', $actual, $message);
-        static::assertArrayHasKey('current_page', $actual, $message);
-        static::assertArrayHasKey('page_number', $actual, $message);
-        static::assertTrue(count($actual['items']) == 0, $message);
-    }
-
-    /**
-     *
-     * @param Pluf_HTTP_Response $response
-     * @param string $message
-     */
-    public static function assertResponseNonEmptyPaginateList($response, $message = '')
-    {
-        static::assertJson($response->content, $message);
-        $actual = json_decode($response->content, true);
-        static::assertArrayHasKey('items', $actual, $message);
-        static::assertArrayHasKey('current_page', $actual, $message);
-        static::assertArrayHasKey('page_number', $actual, $message);
-        static::assertTrue(count($actual['items']) > 0, $message);
-    }
-
-    /**
-     *
-     * @param Pluf_HTTP_Response $response
-     * @param string $message
-     */
-    public static function assertResponseNotAnonymousModel($response, $message = '')
-    {
-        static::assertJson($response->content, $message);
-        $actual = json_decode($response->content, true);
-        static::assertArrayHasKey('id', $actual, $message);
-        static::assertTrue($actual['id'] > 0, $message);
-    }
 }
