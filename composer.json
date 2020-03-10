@@ -22,7 +22,7 @@
 		}
 	],
 	"require" : {
-		"pluf/core" : "^5",
+		"pluf/core" : "5.x",
 		"phpunit/phpunit" : "7.x"
 	},
 	"autoload" : {
