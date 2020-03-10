@@ -6,6 +6,8 @@ use Pluf_HTTP_Response;
 use Pluf_FileUtil;
 define("IN_UNIT_TESTS", true);
 
+require_once 'Pluf.php';
+
 class TestCase extends \PHPUnit\Framework\TestCase
 {
 

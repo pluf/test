@@ -1,5 +1,6 @@
 {
 	"name" : "pluf/test",
+	"version" : "6.0.5",
 	"description" : "A pluf mock object and test utilities",
 	"type" : "library",
 	"license" : "MIT",
@@ -22,7 +23,7 @@
 		}
 	],
 	"require" : {
-		"pluf/core" : "5.x",
+		"pluf/core" : "6.x",
 		"phpunit/phpunit" : "7.x"
 	},
 	"autoload" : {
