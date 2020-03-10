@@ -51,11 +51,6 @@
 			<attribute name="composer" value="vendor"/>
 		</attributes>
 	</buildpathentry>
-	<buildpathentry kind="src" path="vendor/pear/http2">
-		<attributes>
-			<attribute name="composer" value="vendor"/>
-		</attributes>
-	</buildpathentry>
 	<buildpathentry kind="src" path="vendor/pear/mail">
 		<attributes>
 			<attribute name="composer" value="vendor"/>
@@ -151,12 +146,7 @@
 			<attribute name="composer" value="vendor"/>
 		</attributes>
 	</buildpathentry>
-	<buildpathentry kind="src" path="vendor/pluf/core/src">
-		<attributes>
-			<attribute name="composer" value="vendor"/>
-		</attributes>
-	</buildpathentry>
-	<buildpathentry kind="src" path="vendor/pluf/http2/src">
+	<buildpathentry kind="src" path="vendor/pluf/core">
 		<attributes>
 			<attribute name="composer" value="vendor"/>
 		</attributes>
