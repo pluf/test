@@ -44,8 +44,11 @@ class Client
     public $dispatcher = '';
     public $cookies = array();
 
-    public function __construct($views)
+    public function __construct(?array $views = null)
     {
+        if(!isset($views)){
+            $views = \Pluf\Module::loadControllers();
+        }
         $this->views = $views;
         $this->dispatcher = new Pluf_Dispatcher();
         $this->clean(false);

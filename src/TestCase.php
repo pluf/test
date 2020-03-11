@@ -18,13 +18,6 @@ class TestCase extends \PHPUnit\Framework\TestCase
         $GLOBALS['_PX_uniqid'] = uniqid($GLOBALS['_PX_starttime'] . '-time', true);
         $GLOBALS['_PX_signal'] = array();
         $GLOBALS['_PX_locale'] = array();
-
-        require_once 'Pluf.php';
-        $tmp_path = 'tests/tmp';
-        Pluf_FileUtil::removedir($tmp_path);
-        if (! mkdir($tmp_path, 0777, true)) {
-            die('Failed to create temp folder...');
-        }
     }
 
     /**
