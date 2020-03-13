@@ -19,19 +19,17 @@
 
 /**
  * Emulates a client to call your views during unit testing.
- * 
+ *
  * There are several assumption in Pluf_Dispatcher which must fill befor
  * calling a view. This Methodd init system to call view functions.
- * 
+ *
  * Usage:
  * <code>
  * $client = new Pluf_Test_Client('./path/to/app-views.php');
  * $response = $client->get('/the/page/', array('var'=>'toto'));
  * </code>
- * 
- * In this example $response is the view response.
- * 
  *
+ * In this example $response is the view response.
  */
 namespace Pluf\Test;
 
@@ -40,13 +38,16 @@ use Pluf_HTTP_Request;
 
 class Client
 {
+
     public $views = '';
+
     public $dispatcher = '';
+
     public $cookies = array();
 
     public function __construct(?array $views = null)
     {
-        if(!isset($views)){
+        if (! isset($views)) {
             $views = \Pluf\Module::loadControllers();
         }
         $this->views = $views;
@@ -56,17 +57,17 @@ class Client
 
     /**
      * Clean client connection
-     * 
+     *
      * @param boolean $keepcookies
      */
-    public function clean($keepcookies=true)
+    public function clean($keepcookies = true)
     {
         $_REQUEST = array();
-        if (!$keepcookies) {
+        if (! $keepcookies) {
             $_COOKIE = array();
             $this->cookies = array();
         }
-//         $_SERVER = array();
+        // $_SERVER = array();
         $_GET = array();
         $_POST = array();
         $_FILES = array();
@@ -75,14 +76,14 @@ class Client
         $_SERVER['REMOTE_ADDR'] = '127.0.0.1';
         $_SERVER['HTTP_HOST'] = 'localhost';
         $_SERVER['HTTP_USER_AGENT'] = 'pluf/test-Embed PHP Library';
-        
+
         $req = new Pluf_HTTP_Request('');
-        $GLOBALS['_PX_request'] = $req;
+        Pluf_HTTP_Request::setCurrent($req);
     }
 
     /**
      * Dispatch a url
-     * 
+     *
      * @param string $page
      * @return Object
      */
@@ -94,10 +95,10 @@ class Client
             $_COOKIE[$cookie] = $data;
         }
         ob_implicit_flush(False);
-        list($request, $response) = $this->dispatcher->dispatch($page, $this->views);
+        list ($request, $response) = $this->dispatcher->dispatch($page, $this->views);
         ob_start();
         $response->render();
-        $content = ob_get_contents(); 
+        $content = ob_get_contents();
         ob_end_clean();
         $response->content = $content;
         $response->request = $request;
@@ -117,12 +118,13 @@ class Client
 
     /**
      * Calling a get function
-     * 
-     * @param string $page the view url
+     *
+     * @param string $page
+     *            the view url
      * @param array $params
      * @return object
      */
-    public function get($page, $params=array()) 
+    public function get($page, $params = array())
     {
         $this->clean();
         $_GET = $params;
@@ -131,45 +133,46 @@ class Client
         $response = $this->dispatch($page);
         $code = $response->status_code;
         if ($code == 302) {
-            list($page, $params) = $this->parseRedirect($response->headers['Location']);
+            list ($page, $params) = $this->parseRedirect($response->headers['Location']);
             $response = $this->get($page, $params);
         }
         return $response;
     }
 
-    
     /**
      * Calling a post fuction
      *
-     * @param string $page the view url
+     * @param string $page
+     *            the view url
      * @param array $params
-     * @param files list of attached files
+     * @param
+     *            files list of attached files
      * @return object
      */
-    public function post($page, $params=array(), $files=array()) 
+    public function post($page, $params = array(), $files = array())
     {
         $this->clean();
         $_POST = $params;
         $_REQUEST = $params;
-        $_FILES = $files; //FIXME need to match the correct array structure
+        $_FILES = $files; // FIXME need to match the correct array structure
         $_SERVER['REQUEST_METHOD'] = 'POST';
         $response = $this->dispatch($page);
         if ($response->status_code == 302) {
-            list($page, $params) = $this->parseRedirect($response->headers['Location']);
+            list ($page, $params) = $this->parseRedirect($response->headers['Location']);
             return $this->get($page, $params);
         }
         return $response;
     }
 
-    
     /**
      * Calling a delete fuction
      *
-     * @param string $page the view url
+     * @param string $page
+     *            the view url
      * @param array $params
      * @return object
      */
-    public function delete($page, $params=array()) 
+    public function delete($page, $params = array())
     {
         $this->clean();
         $_POST = $params;
@@ -177,7 +180,7 @@ class Client
         $_SERVER['REQUEST_METHOD'] = 'DELETE';
         $response = $this->dispatch($page);
         if ($response->status_code == 302) {
-            list($page, $params) = $this->parseRedirect($response->headers['Location']);
+            list ($page, $params) = $this->parseRedirect($response->headers['Location']);
             return $this->get($page, $params);
         }
         return $response;
@@ -191,7 +194,10 @@ class Client
         if (strlen($query)) {
             parse_str($query, $params);
         }
-        return array($page, $params);
+        return array(
+            $page,
+            $params
+        );
     }
 }
 

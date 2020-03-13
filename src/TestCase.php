@@ -26,12 +26,16 @@ class TestCase extends \PHPUnit\Framework\TestCase
      * @param Pluf_HTTP_Response $response
      * @param string $message
      */
-    public static function assertResponseAsModel($response, $message = ''): void
+    public static function assertResponseAsModel($response, ?string $message = ''): void
     {
-        static::assertJson($response->content, $message);
+        if ($response->content instanceof Pluf_Model) {
+            self::assertFalse($response->content->isAnonymous());
+            return;
+        }
+        self::assertJson($response->content, $message);
         $actual = json_decode($response->content, true);
-        static::assertArrayHasKey('id', $actual, $message);
-        static::assertTrue($actual['id'] > 0, $message);
+        self::assertArrayHasKey('id', $actual, $message);
+        self::assertTrue($actual['id'] > 0, $message);
     }
 
     /**
