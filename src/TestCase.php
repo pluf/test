@@ -3,7 +3,7 @@ declare(strict_types = 1);
 namespace Pluf\Test;
 
 use Pluf_HTTP_Response;
-use Pluf_FileUtil;
+use Pluf_Model;
 define("IN_UNIT_TESTS", true);
 
 require_once 'Pluf.php';
