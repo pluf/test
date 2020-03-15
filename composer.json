@@ -1,5 +1,6 @@
 {
 	"name" : "pluf/test",
+	"version" : "6.0.5",
 	"description" : "A pluf mock object and test utilities",
 	"type" : "library",
 	"license" : "MIT",
@@ -22,10 +23,50 @@
 		}
 	],
 	"require" : {
-		"pluf/core" : "5.12.x",
-		"phpunit/phpunit" : "^8.3"
+		"pluf/core" : "6.x",
+		"phpunit/phpunit" : "7.x"
 	},
-	"include-path" : [
-		"src/"
+	"autoload" : {
+		"psr-4" : {
+			"Pluf\\Test\\" : "src/"
+		}
+	},
+	"autoload-dev" : {
+		"psr-4" : {
+			"Pluf\\Test\\" : "tests/"
+		}
+	},
+	"bin" : [
+		"src/pluftest"
+	],
+	"repositories" : [{
+			"type" : "path",
+			"url" : "../core",
+			"name" : "pluf/core",
+			"options" : {
+				"symlink" : true
+			}
+		}, {
+			"type" : "path",
+			"url" : "../test",
+			"name" : "pluf/test",
+			"options" : {
+				"symlink" : true
+			}
+		}, {
+			"type" : "path",
+			"url" : "../http2",
+			"name" : "pluf/http2",
+			"options" : {
+				"symlink" : true
+			}
+		}, {
+			"type" : "path",
+			"url" : "../user",
+			"name" : "pluf/user",
+			"options" : {
+				"symlink" : true
+			}
+		}
 	]
 }

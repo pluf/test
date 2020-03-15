@@ -17,6 +17,10 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
+namespace Pluf\Test;
+
+use Pluf;
+use Exception;
 
 /**
  * The fixture class is used to prepopulate your database with data.
@@ -25,10 +29,10 @@
  * array = Pluf_Test_Fixture::load('fixturefile.json');
  *
  * Dump the data of a model as a fixture string:
- * $json = Pluf_Test_Fixture::dump('YourApp_Model'); // the full table
- * $json = Pluf_Test_Fixture::dump($model); // one given model
+ * $json = \Pluf\Test\Fixture::dump('YourApp_Model');
+ * $json = \Pluf\Test\Fixture::dump($model);
  */
-class Test_Fixture
+class Fixture
 {
 
     public static function loadFile($file)
