@@ -96,11 +96,11 @@ class Client
         }
         ob_implicit_flush(False);
         list ($request, $response) = $this->dispatcher->dispatch($page, $this->views);
-        ob_start();
-        $response->render();
-        $content = ob_get_contents();
-        ob_end_clean();
-        $response->content = $content;
+//         ob_start();
+//         $response->render();
+//         $content = ob_get_contents();
+//         ob_end_clean();
+//         $response->content = $content;
         $response->request = $request;
         if (isset($GLOBALS['_PX_tests_templates'])) {
             if (count($GLOBALS['_PX_tests_templates']) == 1) {

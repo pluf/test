@@ -8,8 +8,7 @@ final class ClientTest extends TestCase
 {
 
     /**
-     * 
-     * 
+     *
      * @test
      */
     public function canCreateNewInstanceOfClientEveryTime(): void
