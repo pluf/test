@@ -1,5 +1,10 @@
+# Pluf Test
 
-# PlufTest
+[![Build Status](https://travis-ci.com/pluf/test.svg?branch=master)](https://travis-ci.com/pluf/test)
+[![codecov](https://codecov.io/gh/pluf/test/branch/master/graph/badge.svg)](https://codecov.io/gh/pluf/test)
+[![Maintainability](https://api.codeclimate.com/v1/badges/513f356bdf26065cc009/maintainability)](https://codeclimate.com/github/pluf/test/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/513f356bdf26065cc009/test_coverage)](https://codeclimate.com/github/pluf/test/test_coverage)
+[![Coverage Status](https://coveralls.io/repos/github/pluf/test/badge.svg?branch=master)](https://coveralls.io/github/pluf/test?branch=master)
 
 This tutorial assumes that you use PHP 7.3 or PHP 7.4. You will learn how to write simple unit tests as well as how to download and run PlufTest.
 
