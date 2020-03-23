@@ -15,7 +15,7 @@ class TestCase extends \PHPUnit\Framework\TestCase
     {
         parent::__construct($name, $data, $dataName);
         $GLOBALS['_PX_starttime'] = microtime(true);
-        $GLOBALS['_PX_uniqid'] = uniqid($GLOBALS['_PX_starttime'] . '-time', true);
+        $GLOBALS['_PX_uniqid'] = uniqid('pluf-test-time-', true);
         $GLOBALS['_PX_signal'] = array();
         $GLOBALS['_PX_locale'] = array();
     }
