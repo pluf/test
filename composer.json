@@ -1,6 +1,6 @@
 {
 	"name" : "pluf/test",
-	"version" : "6.0.21",
+	"version" : "6.0.22",
 	"description" : "A pluf mock object and test utilities",
 	"type" : "library",
 	"license" : "MIT",
