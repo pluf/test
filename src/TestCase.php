@@ -6,7 +6,7 @@ use Pluf_HTTP_Response;
 use Pluf_Model;
 define("IN_UNIT_TESTS", true);
 
-require_once 'Pluf.php';
+require_once 'bootstrap.php';
 
 class TestCase extends \PHPUnit\Framework\TestCase
 {
